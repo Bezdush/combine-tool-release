@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "channel": "beta",
+  "release": {
+    "addon_id": "combine_tool",
+    "version": "0.0.0-beta.1",
+    "build_id": "example-only",
+    "published_at": "2026-09-30T00:00:00Z",
+    "blender": {
+      "min_version": "4.4.3",
+      "max_version_exclusive": "5.0.0"
+    },
+    "release_notes_url": "https://github.com/Bezdush/combine-tool/releases"
+  },
+  "archive": {
+    "url": "https://example.invalid/combine-tool/beta/packages/combine_tool-0.0.0-beta.1.zip",
+    "filename": "combine_tool-0.0.0-beta.1.zip",
+    "size_bytes": 1
+  },
+  "integrity": {
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "example-key",
+    "value": "EXAMPLE-ONLY-NOT-A-VALID-SIGNATURE"
+  }
+}

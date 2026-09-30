@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Bezdush/combine-tool-release/blob/main/manifest.schema.json",
+  "title": "Combine Tool public release manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "channel",
+    "release",
+    "archive",
+    "integrity",
+    "signature"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "channel": {
+      "enum": ["stable", "beta"]
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["addon_id", "version", "build_id", "published_at", "blender"],
+      "properties": {
+        "addon_id": {
+          "const": "combine_tool"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+        },
+        "build_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "published_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "blender": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min_version", "max_version_exclusive"],
+          "properties": {
+            "min_version": {
+              "type": "string",
+              "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+            },
+            "max_version_exclusive": {
+              "type": "string",
+              "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+            }
+          }
+        },
+        "release_notes_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "filename", "size_bytes"],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "filename": {
+          "type": "string",
+          "pattern": "^combine_tool-[0-9A-Za-z._+-]+\\.zip$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256"],
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "key_id", "value"],
+      "properties": {
+        "algorithm": {
+          "const": "ed25519"
+        },
+        "key_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,41 +1,33 @@
 # Combine Tool public release feed
 
-This public repository contains only distribution metadata and packaged public releases for **Combine Tool**. It never contains the add-on source code.
+This public repository contains packaged releases and signed channel pointers for Combine Tool. It never contains add-on source code or signing credentials.
 
-## Public release channels
+## Public channels
 
-| Channel | Intended audience | Manifest URL |
+| Channel | Audience | Raw manifest |
 | --- | --- | --- |
-| `stable` | Public releases approved for everyday work. | `stable/manifest.json` |
-| `beta` | Opt-in public pre-release validation. May contain unfinished features. | `beta/manifest.json` |
+| `test` | Public experimental builds after main CI passes. | [test/manifest.json](test/manifest.json) |
+| `beta` | Opt-in public pre-release validation. | [beta/manifest.json](beta/manifest.json) |
+| `stable` | Approved releases for everyday work. | [stable/manifest.json](stable/manifest.json) |
 
-The updater must never switch channels by itself. A missing channel manifest means that channel currently has no published build.
+Updater URLs use `https://raw.githubusercontent.com/Bezdush/combine-tool-release/main/<channel>/manifest.json`. A missing pointer means no build is currently published. TEST is public; there is no private TEST feed.
 
-The raw URL pattern is:
+## Manifest contract
 
-`https://raw.githubusercontent.com/Bezdush/combine-tool-release/main/<channel>/manifest.json`
+All three channels use the same `combine-tool-channel-manifest-v1` format in [manifest.schema.json](manifest.schema.json). [manifest.example.json](manifest.example.json) is illustrative only and its signature is not trusted.
 
-## Test builds
+The signature is Ed25519 over the canonical UTF-8 payload: the complete manifest object without `signature`, recursively sorted keys, compact JSON separators, no ASCII escaping, and one trailing LF. The source repository's `scripts/release_manifest.py` defines the canonical bytes and validation contract.
 
-The `test` directory is a public marker only. Development/test builds, their manifests, and their archives are deliberately **not** published from this repository. They use a separate private development feed.
+Each pointer binds channel, add-on version, build ID, commit SHA, Blender compatibility, immutable archive URL/name/size/SHA-256, notes and source release tag. Updater verifies the signature before trusting these fields and checks archive size and SHA-256 before staging.
 
-## Publication contract
+## Build and promotion
 
-- Current manifest format: `schema_version: 1`.
-- A release is published atomically: its ZIP, `manifest.json`, and optional notes must appear in the same commit.
-- The archive must be verified by SHA-256 before staging.
-- The manifest is detached-signed with Ed25519. The signature covers the canonical JSON payload described below.
-- A build is installed only after Blender is closed/restarted; the previous installed copy remains available for rollback.
-- Existing published archives and manifests are immutable. Corrections use a new version/build ID.
+The source workflow builds a candidate ZIP once, validates it, and tests those same bytes with Blender 4.4.3. TEST publishes that exact artifact after CI passes. Promotion copies the existing archive through `TEST → BETA → STABLE`; it never rebuilds.
 
-### Signature payload
-
-The signature covers the UTF-8 bytes of the object formed by the top-level fields `schema_version`, `channel`, `release`, `archive`, and `integrity`. Serialization is canonical JSON: recursively sorted keys, compact separators `,` and `:`, and UTF-8 without ASCII escaping. The `signature` object itself is excluded.
-
-See [manifest.schema.json](manifest.schema.json) for the machine-readable contract and [manifest.example.json](manifest.example.json) for a non-publishable example.
+Archive releases and tags are immutable. Channel manifest files are signed pointers and may be updated for promotion or rollback. Rollback changes only the pointer; it does not alter release assets. Never overwrite or delete a release asset.
 
 ## Repository scope
 
-Allowed: signed beta/stable manifests, their ZIP release assets, release notes, and this distribution documentation.
+Allowed: signed channel pointers, immutable ZIP release assets and distribution documentation.
 
-Not allowed: add-on source, development/test builds, Blender scene files, test scenes, private keys, personal access tokens, or user data.
+Not allowed: add-on source, private keys, access tokens, user data or unpublished credentials.

@@ -1,112 +1,138 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/Bezdush/combine-tool-release/blob/main/manifest.schema.json",
-  "title": "Combine Tool public release manifest",
+  "title": "Combine Tool channel manifest v1",
   "type": "object",
   "additionalProperties": false,
   "required": [
+    "schema",
     "schema_version",
     "channel",
-    "release",
+    "addon_version",
+    "build_id",
+    "commit_sha",
+    "published_at",
+    "blender_min",
+    "blender_max",
     "archive",
-    "integrity",
+    "release_notes",
+    "source_release_tag",
     "signature"
   ],
   "properties": {
+    "schema": {
+      "const": "combine-tool-channel-manifest-v1"
+    },
     "schema_version": {
       "const": 1
     },
     "channel": {
-      "enum": ["stable", "beta"]
+      "enum": [
+        "test",
+        "beta",
+        "stable"
+      ]
     },
-    "release": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["addon_id", "version", "build_id", "published_at", "blender"],
-      "properties": {
-        "addon_id": {
-          "const": "combine_tool"
+    "addon_version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "build_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "commit_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "blender_min": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "blender_max": {
+      "oneOf": [
+        {
+          "type": "null"
         },
-        "version": {
-          "type": "string",
-          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
-        },
-        "build_id": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
-        },
-        "published_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "blender": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["min_version", "max_version_exclusive"],
-          "properties": {
-            "min_version": {
-              "type": "string",
-              "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
-            },
-            "max_version_exclusive": {
-              "type": "string",
-              "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
-            }
-          }
-        },
-        "release_notes_url": {
-          "type": "string",
-          "format": "uri"
+        {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 3,
+          "maxItems": 3
         }
-      }
+      ]
     },
     "archive": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["url", "filename", "size_bytes"],
+      "required": [
+        "url",
+        "name",
+        "size",
+        "sha256"
+      ],
       "properties": {
         "url": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "pattern": "^https://"
         },
-        "filename": {
+        "name": {
           "type": "string",
-          "pattern": "^combine_tool-[0-9A-Za-z._+-]+\\.zip$"
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}\\.zip$"
         },
-        "size_bytes": {
+        "size": {
           "type": "integer",
-          "minimum": 1
+          "minimum": 1,
+          "maximum": 268435456
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         }
       }
     },
-    "integrity": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["sha256"],
-      "properties": {
-        "sha256": {
-          "type": "string",
-          "pattern": "^[a-f0-9]{64}$"
-        }
-      }
+    "release_notes": {
+      "type": "string",
+      "maxLength": 32768
+    },
+    "source_release_tag": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
     },
     "signature": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["algorithm", "key_id", "value"],
+      "required": [
+        "algorithm",
+        "key_id",
+        "value"
+      ],
       "properties": {
         "algorithm": {
           "const": "ed25519"
         },
         "key_id": {
           "type": "string",
-          "minLength": 1,
-          "maxLength": 128
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
         },
         "value": {
           "type": "string",
-          "minLength": 1
+          "pattern": "^[A-Za-z0-9+/]{86}==$"
         }
       }
     }

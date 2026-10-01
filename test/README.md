@@ -1,5 +1,5 @@
-# Private test feed marker
+# Public TEST feed
 
-This public repository does not publish development or test manifests, ZIPs, or notes.
+`test/manifest.json` is the public TEST channel pointer consumed by the updater. TEST packages are published only after main checks and Blender 4.4.3 validation pass. The exact candidate ZIP tested by CI is published; the workflow does not rebuild it.
 
-The project uses a separate private development feed for test builds. This directory exists only to make that boundary explicit.
+The file uses the same signed `combine-tool-channel-manifest-v1` contract as BETA and STABLE. TEST has no private feed.

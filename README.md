@@ -1,33 +1,23 @@
-# Combine Tool release feed
+# Combine Tool for Blender
 
-This public repository is a delivery channel only. It contains signed pointers for public releases and never contains add-on source code, TEST builds, signing keys, access tokens, or user data.
+[**Downloads and installation →**](https://bezdush.github.io/combine-tool-release/)
 
-## Public channels
+Choose **Stable** for everyday work or **Beta** for a preview. Download the `combine_tool_VERSION.zip` asset. GitHub’s automatic “Source code” archives contain this delivery website, not the add-on.
 
-| Channel | Purpose | Manifest |
-| --- | --- | --- |
-| `beta` | Opt-in public pre-release validation. | `beta/manifest.json` |
-| `stable` | Approved releases for everyday work. | `stable/manifest.json` |
+## Install
 
-A missing manifest means that no release has been published for that channel yet. TEST builds are private to the maintainers and are never published here.
+Keep the ZIP zipped. In Blender, open **Edit → Preferences → Add-ons → Install from Disk**, select the ZIP and enable Combine Tool. Use the Blender versions shown with your release. Save your work before updating.
 
-## Update trust model
+[Report a problem](https://github.com/Bezdush/combine-tool-release/issues/new) with your add-on version, Blender version and steps to reproduce. Remove private data from attachments.
 
-Each published pointer conforms to [manifest.schema.json](manifest.schema.json) and is signed with Ed25519. The updater verifies that signature before accepting any field, then verifies the immutable release asset's size and SHA-256 before staging an update.
+## Delivery contract
 
-The ZIP is built once on the private release line, tested with Blender 4.4.3 and 4.5 LTS, then copied unchanged through BETA and STABLE. Release assets and tags are immutable. A rollback changes only a signed channel pointer; it never rewrites an asset.
+The signed `stable/manifest.json` and `beta/manifest.json` identify recommended downloads, including after a rollback. GitHub “latest” is not the source of truth. Missing manifests mean no verified release is available yet; no placeholders are published.
 
-## Repository scope
+Stable uses `vX.Y.Z`; Beta uses `vX.Y.Z-beta.N` and is marked Pre-release. Assets are an immutable user ZIP and `channel-manifest.json`, the signed snapshot used for integrity and rollback. Human notes include changes, fixes, known limitations and tested Blender compatibility.
 
-Allowed:
+The page reads current pointers and loads stable history automatically. Browser UI does not verify signatures; the publisher and add-on updater do. Internal metadata stays inside the ZIP and signed manifest, with optional technical details on the page. Separate checksum/build-info sidecars are unnecessary.
 
-- `beta/manifest.json` and `stable/manifest.json`;
-- immutable GitHub Release assets;
-- this schema and delivery documentation.
+`manifest.schema.json` remains the public updater contract. TEST stays private. This repository contains no add-on source tree, private keys, tokens or user data. Only the owner and controlled publisher write; visitors read and download.
 
-Not allowed:
-
-- add-on source;
-- TEST assets or manifests;
-- private keys, access tokens, or other credentials;
-- user data.
+The page becomes available after its PR is merged and GitHub Pages is enabled with **Source: GitHub Actions**.

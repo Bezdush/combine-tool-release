@@ -20,4 +20,4 @@ The page reads current pointers and loads stable history automatically. Browser 
 
 `manifest.schema.json` remains the public updater contract. TEST stays private. This repository contains no add-on source tree, private keys, tokens or user data. Only the owner and controlled publisher write; visitors read and download.
 
-The page becomes available after its PR is merged and GitHub Pages is enabled with **Source: GitHub Actions**.
+GitHub Pages is enabled with **Source: GitHub Actions** and HTTPS. The page becomes available after this PR is merged. Public `main` is protected against force pushes/deletion, with PR review required for non-admins. The owner retains administrator bypass for the controlled publisher; no other collaborator currently has write access.

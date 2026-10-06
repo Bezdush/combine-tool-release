@@ -1,0 +1,32 @@
+{
+  "addon_version": "0.3.109",
+  "archive": {
+    "name": "combine_tool_0.3.109-beta.1.zip",
+    "sha256": "343c9bf108c16dd9c1d69cc778ce6077873b55581ec3be361bf75d025a0d8572",
+    "size": 118643,
+    "url": "https://github.com/Bezdush/combine-tool-release/releases/download/v0.3.109-beta.1/combine_tool_0.3.109-beta.1.zip"
+  },
+  "blender_max": [
+    4,
+    5,
+    3
+  ],
+  "blender_min": [
+    4,
+    4,
+    3
+  ],
+  "build_id": "test-20261006.1342-901761e7",
+  "channel": "beta",
+  "commit_sha": "901761e7e94cf32326e4761716885e4a8a0b2840",
+  "published_at": "2026-10-06T14:01:19Z",
+  "release_notes": "First public Beta: public delivery flow and updater release-readiness hardening. No known release-blocking limitations.\n\nTested in Blender 4.4.3 and 4.5.3 LTS. Supported range: 4.4.3 – 4.5.3",
+  "schema": "combine-tool-channel-manifest-v1",
+  "schema_version": 1,
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "combine-release-2026-01",
+    "value": "aXwoUXQfaUJNZKDl4k0r/mrshwq7yrkzrhFA8uK2La/ck3Ul+MrEYATEcc52E0jzMgyUHPQxmmQ39aYTcI4TCw=="
+  },
+  "source_release_tag": "test-v0.3.109-test.20261006.1343+901761e7"
+}

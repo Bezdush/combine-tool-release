@@ -1,10 +1,10 @@
 {
   "addon_version": "0.3.110",
   "archive": {
-    "name": "combine_tool_0.3.110-test-7de0072d.zip",
-    "sha256": "05e67d465853a4990a19ad2d5234ee6c51dce095e4ad96e6c46dce2cb18c83a7",
-    "size": 121874,
-    "url": "https://github.com/Bezdush/combine-tool-release/releases/download/test-v0.3.110-7de0072d/combine_tool_0.3.110-test-7de0072d.zip"
+    "name": "combine_tool_0.3.110-test-9ab40e62.zip",
+    "sha256": "f2d398750238a71affdf75284563ae5e986f8b71a8baa928c3806fc74bd6383f",
+    "size": 121873,
+    "url": "https://github.com/Bezdush/combine-tool-release/releases/download/test-v0.3.110-9ab40e62/combine_tool_0.3.110-test-9ab40e62.zip"
   },
   "blender_max": [
     4,
@@ -16,17 +16,17 @@
     4,
     3
   ],
-  "build_id": "test-7de0072d",
+  "build_id": "test-9ab40e62",
   "channel": "test",
-  "commit_sha": "7de0072db50c0c22f0cef957a414d6e20535457a",
-  "published_at": "2026-10-06T21:09:12Z",
-  "release_notes": "TEST build. test-v0.3.110-7de0072d\n\nTested in Blender 4.4.3 and 4.5.3 LTS. Supported range: 4.4.3 – 4.5.3",
+  "commit_sha": "9ab40e629153d024eff173bae9a8e5bb2ce29eea",
+  "published_at": "2026-10-06T21:32:55Z",
+  "release_notes": "TEST build. test-v0.3.110-9ab40e62\n\nTested in Blender 4.4.3 and 4.5.3 LTS. Supported range: 4.4.3 – 4.5.3",
   "schema": "combine-tool-channel-manifest-v1",
   "schema_version": 1,
   "signature": {
     "algorithm": "ed25519",
     "key_id": "combine-release-2026-01",
-    "value": "g98ViKnftRXus9hr+zc3sgErop1Yh7DrqgX1cCPbUn+HDx1dIL/vM9p2bGhqMSG/J77eLjhAqctiG1g5TsWGAw=="
+    "value": "8FdvN779MGwLmbrLfqKqoCTgFZScoe2beu3puAFWavb5WbK9GR5OIwQqfC59e8EyJyqkiHXm4/c9J1XWOuS+AA=="
   },
-  "source_release_tag": "test-v0.3.110-7de0072d"
+  "source_release_tag": "test-v0.3.110-9ab40e62"
 }

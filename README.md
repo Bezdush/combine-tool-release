@@ -2,6 +2,8 @@
 
 Combine Tool is a Blender add-on for non-destructive assembly of evaluated meshes while preserving the source scene.
 
+Maintainers: see [FIRST_RELEASE.md](FIRST_RELEASE.md) before publishing the first BETA or STABLE build.
+
 ## Installation
 
 Download the versioned ZIP from the [Combine Tool release page](https://bezdush.github.io/combine-tool-release/).

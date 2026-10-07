@@ -1,0 +1,32 @@
+{
+  "addon_version": "0.3.110",
+  "archive": {
+    "name": "combine_tool_0.3.110.zip",
+    "sha256": "57eec6800f39cc0577b81023117c311c0c6a57834c3911c1c229d07e43d4362c",
+    "size": 121873,
+    "url": "https://github.com/Bezdush/combine-tool-release/releases/download/v0.3.110/combine_tool_0.3.110.zip"
+  },
+  "blender_max": [
+    4,
+    5,
+    3
+  ],
+  "blender_min": [
+    4,
+    4,
+    3
+  ],
+  "build_id": "test-7d11d3f0",
+  "channel": "stable",
+  "commit_sha": "7d11d3f0a09df633e5c9dec90f30ad4604bc3463",
+  "published_at": "2026-10-07T11:46:17Z",
+  "release_notes": "Stable release 0.3.110. Tested in Blender 4.4.3 and 4.5.3 LTS.\n\nTested in Blender 4.4.3 and 4.5.3 LTS. Supported range: 4.4.3 – 4.5.3",
+  "schema": "combine-tool-channel-manifest-v1",
+  "schema_version": 1,
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "combine-release-2026-01",
+    "value": "xx9CJrZsAlSHAIOsXuKT9W/36bOT4UwNNgR2DM2oi5PGNA87RzTcnsCK4dXuNhKFLqlW9H3fjv9P4j4z0dPOBA=="
+  },
+  "source_release_tag": "v0.3.110-beta.3"
+}

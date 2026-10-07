@@ -1,7 +1,50 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Combine Tool · Downloads</title><link rel="stylesheet" href="style.css"><script src="releases.js" defer></script></head>
-<body><main><header><p class="badge">BLENDER ADD-ON</p><h1>Combine Tool</h1><p>Official downloads. Stable for everyday work, Beta to preview upcoming changes.</p></header>
-<section id="stable" aria-live="polite">Loading Stable…</section><section id="beta" aria-live="polite">Loading Beta…</section>
-<section><h2>Install in Blender</h2><ol><li>Download the ZIP and keep it zipped.</li><li>Open Edit → Preferences → Add-ons → Install from Disk.</li><li>Select the ZIP and enable Combine Tool.</li></ol><p>Save your work before updating. Use the Blender versions listed with your download.</p></section>
-<section><h2>Previous stable releases</h2><p>The recommended version is identified above, including after a rollback. This is release history.</p><div id="history">Loading archive…</div></section>
-<footer><a href="https://github.com/Bezdush/combine-tool-release/issues/new">Report a problem</a> · <a href="https://github.com/Bezdush/combine-tool-release">Release repository</a><p>Include the add-on version, Blender version and steps to reproduce. Remove private data from attachments.</p></footer></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Download and install the Combine Tool Blender add-on.">
+  <title>Combine Tool</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="releases.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Blender add-on</p>
+      <h1>Combine Tool</h1>
+      <p class="purpose">A Blender add-on for non-destructive assembly of evaluated meshes while preserving the source scene.</p>
+    </header>
+
+    <section class="downloads" aria-labelledby="downloads-title">
+      <h2 id="downloads-title">Downloads</h2>
+      <div class="release-grid">
+        <section id="stable" class="release-card" aria-live="polite" aria-busy="true">
+          <h3>Stable</h3>
+          <p>Loading release…</p>
+        </section>
+        <section id="beta" class="release-card" aria-live="polite" aria-busy="true">
+          <h3>Beta</h3>
+          <p>Loading release…</p>
+        </section>
+      </div>
+    </section>
+
+    <section aria-labelledby="install-title">
+      <h2 id="install-title">Installation</h2>
+      <ol>
+        <li>Download the ZIP for your Blender version.</li>
+        <li>In Blender, open <span class="ui-label">Edit → Preferences → Add-ons → Install from Disk</span>.</li>
+        <li>Select the ZIP, install it, then enable Combine Tool.</li>
+      </ol>
+      <p class="note">Save your work before installing or updating the add-on.</p>
+    </section>
+
+    <section aria-labelledby="report-title">
+      <h2 id="report-title">Report a problem</h2>
+      <p><a href="https://github.com/Bezdush/combine-tool-release/issues">Browse existing reports</a> or <a href="https://github.com/Bezdush/combine-tool-release/issues/new">open a new report</a>.</p>
+      <p class="note">Include the add-on version, Blender version, and steps to reproduce. Remove private data from screenshots and files before attaching them.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -3,47 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Download and install the Combine Tool Blender add-on.">
-  <title>Combine Tool</title>
+  <meta name="description" content="Combine Tool for Blender: downloads, compatibility, installation and release history.">
+  <title>Combine Tool — Blender add-on</title>
   <link rel="stylesheet" href="style.css">
   <script src="releases.js" defer></script>
 </head>
 <body>
   <main>
-    <header>
+    <header class="hero">
       <p class="eyebrow">Blender add-on</p>
       <h1>Combine Tool</h1>
-      <p class="purpose">A Blender add-on for non-destructive assembly of evaluated meshes while preserving the source scene.</p>
+      <p class="purpose">Assemble evaluated meshes into a target without changing the source scene.</p>
+      <a href="#downloads" class="hero-link">Find a download ↓</a>
     </header>
 
-    <section class="downloads" aria-labelledby="downloads-title">
-      <h2 id="downloads-title">Downloads</h2>
+    <section id="downloads" aria-labelledby="downloads-title">
+      <h2 id="downloads-title">Download Combine Tool</h2>
+      <p class="intro">Choose Stable for regular use. Beta is a preview of the next release.</p>
       <div class="release-grid">
-        <section id="stable" class="release-card" aria-live="polite" aria-busy="true">
-          <h3>Stable</h3>
-          <p>Loading release…</p>
-        </section>
-        <section id="beta" class="release-card" aria-live="polite" aria-busy="true">
-          <h3>Beta</h3>
-          <p>Loading release…</p>
-        </section>
+        <article id="stable" class="release-card" aria-live="polite" aria-busy="true">
+          <h3>Stable</h3><p>Loading release information…</p>
+        </article>
+        <article id="beta" class="release-card" aria-live="polite" aria-busy="true">
+          <h3>Beta</h3><p>Loading release information…</p>
+        </article>
       </div>
+      <p class="note">Downloads are the published ZIP assets from the <a href="https://github.com/Bezdush/combine-tool-release/releases">public release repository</a>.</p>
     </section>
 
-    <section aria-labelledby="install-title">
-      <h2 id="install-title">Installation</h2>
+    <section id="features" aria-labelledby="features-title">
+      <h2 id="features-title">What it does</h2>
+      <ul class="features">
+        <li><strong>Source Graph</strong><span>Resolve objects, collections, instances and target dependencies.</span></li>
+        <li><strong>Controlled output</strong><span>Choose UV and material policies for the combined target.</span></li>
+        <li><strong>Clear diagnostics</strong><span>Inspect issues and export HTML reports before updating.</span></li>
+      </ul>
+    </section>
+
+    <section id="installation" aria-labelledby="installation-title">
+      <h2 id="installation-title">Install or update</h2>
       <ol>
-        <li>Download the ZIP for your Blender version.</li>
-        <li>In Blender, open <span class="ui-label">Edit → Preferences → Add-ons → Install from Disk</span>.</li>
-        <li>Select the ZIP, install it, then enable Combine Tool.</li>
+        <li>Save your Blender project and download the ZIP from the Stable or Beta card.</li>
+        <li>In Blender, open <strong>Edit → Preferences → Add-ons → Install from Disk</strong>.</li>
+        <li>Select the ZIP and enable Combine Tool. Keep the ZIP intact; Blender installs it directly.</li>
       </ol>
-      <p class="note">Save your work before installing or updating the add-on.</p>
+      <p class="note">For an existing installation, use the add-on's update option or install the newer ZIP through Blender. The updater verifies the signed channel manifest and archive checksum before installation.</p>
     </section>
 
-    <section aria-labelledby="report-title">
-      <h2 id="report-title">Report a problem</h2>
-      <p><a href="https://github.com/Bezdush/combine-tool-release/issues">Browse existing reports</a> or <a href="https://github.com/Bezdush/combine-tool-release/issues/new">open a new report</a>.</p>
-      <p class="note">Include the add-on version, Blender version, and steps to reproduce. Remove private data from screenshots and files before attaching them.</p>
+    <section id="documentation" aria-labelledby="documentation-title">
+      <h2 id="documentation-title">Documentation</h2>
+      <p>In Blender, mark a target object, select its sources and policies, then review diagnostics before running Update. Combine Tool preserves the source objects while refreshing the target mesh.</p>
+      <p>For a problem report, include the Combine Tool and Blender versions and steps to reproduce. <a href="https://github.com/Bezdush/combine-tool-release/issues">Browse reports</a> or <a href="https://github.com/Bezdush/combine-tool-release/issues/new">open an issue</a>.</p>
+    </section>
+
+    <section id="history" aria-labelledby="history-title">
+      <h2 id="history-title">Release history and changes</h2>
+      <p>Read the notes for each published version in <a href="https://github.com/Bezdush/combine-tool-release/releases">GitHub Releases</a>. The Stable and Beta cards link directly to their current release pages.</p>
     </section>
   </main>
 </body>

@@ -19,16 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - name: Stage only delivery files
+      - name: Stage only public site files
         run: |
           mkdir site
           cp index.html style.css releases.js .nojekyll site/
-          for channel in beta stable; do
-            if test -f "$channel/manifest.json"; then
-              mkdir "site/$channel"
-              cp "$channel/manifest.json" "site/$channel/manifest.json"
-            fi
-          done
+          python scripts/build_site.py --output site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

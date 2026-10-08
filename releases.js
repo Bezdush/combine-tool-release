@@ -8,9 +8,11 @@ function node(tag, text) {
   return element;
 }
 
-function safeArchive(url, version, name) {
-  return /^combine_tool_\d+\.\d+\.\d+(-beta\.[1-9]\d*)?\.zip$/.test(name)
-    && url === `https://github.com/${repo}/releases/download/v${version}/${name}`;
+function safeArchive(url, channel, version, name) {
+  if (!['stable', 'beta'].includes(channel) || name !== `combine_tool_${version}.zip`) return false;
+  const base = `https://github.com/${repo}/releases/download`;
+  return url === `${base}/${channel}/v${version}/${name}`
+    || url === `${base}/v${version}/${name}`; // Older releases use unprefixed tags.
 }
 
 function makeLink(url, text) {
@@ -46,7 +48,7 @@ async function loadChannel(channel) {
       && manifest.blender_max.every(Number.isInteger);
 
     if (manifest.channel !== channel || manifest.schema_version !== 1 || !manifest.signature || !version
-      || !safeArchive(manifest.archive.url, version, manifest.archive.name)
+      || !safeArchive(manifest.archive.url, channel, version, manifest.archive.name)
       || (channel === 'beta') !== version.includes('-beta.')
       || version.split('-')[0] !== manifest.addon_version || !blenderRangeIsValid) {
       throw new Error('Invalid release manifest');

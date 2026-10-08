@@ -21,10 +21,16 @@ def get_json(url: str) -> dict:
         return json.load(response)
 
 
-def public_release(channel: str) -> dict:
+def public_release(channel: str) -> dict | None:
     if channel not in {"stable", "beta"}:
         raise ValueError("Only public channels are allowed on Pages")
-    manifest = json.loads((ROOT / channel / "manifest.json").read_text(encoding="utf-8"))
+    pointer = ROOT / channel / "manifest.json"
+    # A clean distribution repository has no channel pointer until the first
+    # verified promotion.  Missing pointers are a normal empty state; malformed
+    # pointers remain a hard failure below.
+    if not pointer.is_file():
+        return None
+    manifest = json.loads(pointer.read_text(encoding="utf-8"))
     archive = manifest.get("archive", {})
     signature = manifest.get("signature", {})
     if (manifest.get("schema") != "combine-tool-channel-manifest-v1"

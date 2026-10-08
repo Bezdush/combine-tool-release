@@ -16,6 +16,12 @@ function link(url, text, className) {
 function showRelease(channel, release) {
   const panel = document.getElementById(channel);
   const title = channel === 'stable' ? 'Stable' : 'Beta';
+  if (!release) {
+    panel.replaceChildren(element('h3', title),
+      element('p', 'No release has been published for this channel yet.'));
+    panel.setAttribute('aria-busy', 'false');
+    return;
+  }
   const version = element('p', `Version ${release.version}`);
   version.className = 'version';
   const compatibility = element('p', `Blender ${release.blender_min.join('.')}–${release.blender_max.join('.')}`);

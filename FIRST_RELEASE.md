@@ -1,11 +1,11 @@
 # First release checklist
 
-This repository starts without a BETA or STABLE channel pointer. Do not add empty manifests or sample ZIP files: the promotion workflows create the first signed pointers from the selected artifact.
+This repository may start without a BETA or STABLE channel pointer. Do not add empty manifests or sample ZIP files: the promotion workflows create the first signed pointers from the selected artifact. The public site intentionally shows an unpublished channel until then.
 
 ## One-time state
 
 - `main` contains the public site, `manifest.schema.json`, and the Pages workflow.
-- There are no historical public releases or tags that collide with the first intended tags, for example `v0.3.111-beta.1` and `v0.3.111`.
+- There are no historical public releases or tags that collide with the first intended tags, for example `beta/v0.3.112-beta.1` and `stable/v0.3.112`.
 - The GitHub Pages site is enabled and the **Release page** workflow can deploy from `main`.
 - Release immutability is enabled for this repository.
 - The publishing token used by the source repository can create tags and releases and push the signed channel pointers to this repository's `main` branch.
@@ -14,9 +14,8 @@ This repository starts without a BETA or STABLE channel pointer. Do not add empt
 
 1. In the source repository, run **Build TEST** from `main` and wait for every test and `finalize-test` to pass.
 2. Download and inspect the inner add-on ZIP from the TEST artifact.
-3. Copy the resulting annotated TEST tag, for example `test-20261008T010000Z-r123456789-a1`.
-4. Run **Promote BETA** from `main`, enter that TEST tag and a new version tag such as `v0.3.111-beta.1`, then approve the protected `beta` environment.
-5. Verify the new immutable BETA release, its ZIP digest, `channel-manifest.json`, the `beta/manifest.json` pointer, and the Pages download card.
+3. Run **Promote BETA** from `main`, select the exact `TEST …` candidate from the environment dropdown, then approve the protected `beta` environment.
+4. Verify the new immutable BETA release, its ZIP digest, `channel-manifest.json`, the `beta/manifest.json` pointer, and the Pages download card.
 
 ## First STABLE
 

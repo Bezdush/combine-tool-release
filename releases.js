@@ -1,86 +1,52 @@
 'use strict';
 
-const repo = 'Bezdush/combine-tool-release';
-
-function node(tag, text) {
-  const element = document.createElement(tag);
-  if (text !== undefined) element.textContent = text;
-  return element;
+function element(tag, text) {
+  const item = document.createElement(tag);
+  item.textContent = text;
+  return item;
 }
 
-function safeArchive(url, channel, version, name) {
-  if (!['stable', 'beta'].includes(channel) || name !== `combine_tool_${version}.zip`) return false;
-  const base = `https://github.com/${repo}/releases/download`;
-  return url === `${base}/${channel}/v${version}/${name}`
-    || url === `${base}/v${version}/${name}`; // Older releases use unprefixed tags.
+function link(url, text, className) {
+  const item = element('a', text);
+  item.href = url;
+  if (className) item.className = className;
+  return item;
 }
 
-function makeLink(url, text) {
-  const element = node('a', text);
-  element.href = url;
-  element.className = 'download';
-  return element;
-}
-
-function showUnavailable(panel, channel) {
-  panel.replaceChildren(
-    node('h3', channel === 'stable' ? 'Stable' : 'Beta'),
-    node('p', `No ${channel} release is available yet.`)
-  );
+function showRelease(channel, release) {
+  const panel = document.getElementById(channel);
+  const title = channel === 'stable' ? 'Stable' : 'Beta';
+  const version = element('p', `Version ${release.version}`);
+  version.className = 'version';
+  const compatibility = element('p', `Blender ${release.blender_min.join('.')}–${release.blender_max.join('.')}`);
+  compatibility.className = 'availability';
+  panel.replaceChildren(element('h3', title), version, compatibility);
+  if (channel === 'beta') {
+    const preview = element('p', 'Preview release');
+    preview.className = 'preview';
+    panel.append(preview);
+  }
+  panel.append(link(release.archive_url, channel === 'stable' ? 'Download Stable ZIP' : 'Download Beta ZIP', 'download'));
+  const details = element('p', '');
+  details.append(link(release.release_url, 'Read release notes'));
+  panel.append(details);
   panel.setAttribute('aria-busy', 'false');
 }
 
-async function loadChannel(channel) {
-  const panel = document.getElementById(channel);
-  try {
-    const response = await fetch(`${channel}/manifest.json`, { cache: 'no-store' });
-    if (response.status === 404) {
-      showUnavailable(panel, channel);
-      return;
+fetch('releases.json')
+  .then(response => {
+    if (!response.ok) throw new Error('Release data unavailable');
+    return response.json();
+  })
+  .then(releases => {
+    showRelease('stable', releases.stable);
+    showRelease('beta', releases.beta);
+  })
+  .catch(() => {
+    for (const channel of ['stable', 'beta']) {
+      const panel = document.getElementById(channel);
+      panel.replaceChildren(element('h3', channel === 'stable' ? 'Stable' : 'Beta'),
+        element('p', 'Release information is temporarily unavailable. Please use the release history link below.'));
+      panel.setAttribute('aria-busy', 'false');
     }
-    if (!response.ok) throw new Error('Release manifest unavailable');
-
-    const manifest = await response.json();
-    const version = /\/v(\d+\.\d+\.\d+(?:-beta\.[1-9]\d*)?)\//.exec(manifest.archive.url)?.[1];
-    const blenderRangeIsValid = Array.isArray(manifest.blender_min)
-      && Array.isArray(manifest.blender_max)
-      && manifest.blender_min.every(Number.isInteger)
-      && manifest.blender_max.every(Number.isInteger);
-
-    if (manifest.channel !== channel || manifest.schema_version !== 1 || !manifest.signature || !version
-      || !safeArchive(manifest.archive.url, channel, version, manifest.archive.name)
-      || (channel === 'beta') !== version.includes('-beta.')
-      || version.split('-')[0] !== manifest.addon_version || !blenderRangeIsValid) {
-      throw new Error('Invalid release manifest');
-    }
-
-    const versionText = node('p', `Version ${version}`);
-    versionText.className = 'version';
-    panel.replaceChildren(node('h3', channel === 'stable' ? 'Stable' : 'Beta'), versionText);
-    const compatibility = node('p', `Blender ${manifest.blender_min.join('.')}–${manifest.blender_max.join('.')}`);
-    compatibility.className = 'availability';
-    panel.append(compatibility);
-
-    if (channel === 'beta') {
-      const betaNotice = node('p', 'Preview version.');
-      betaNotice.className = 'availability';
-      panel.append(betaNotice);
-    }
-
-    panel.append(makeLink(manifest.archive.url, channel === 'stable' ? 'Download' : 'Download beta'));
-
-    const notesHeading = node('h4', 'Release notes');
-    const notes = node('p', manifest.release_notes || 'No release notes provided.');
-    notes.className = 'notes';
-    panel.append(notesHeading, notes);
-    panel.setAttribute('aria-busy', 'false');
-  } catch (_) {
-    panel.replaceChildren(
-      node('h3', channel === 'stable' ? 'Stable' : 'Beta'),
-      node('p', 'Release information is temporarily unavailable. Please try again later.')
-    );
-    panel.setAttribute('aria-busy', 'false');
-  }
-}
-
-Promise.allSettled([loadChannel('stable'), loadChannel('beta')]);
+  });

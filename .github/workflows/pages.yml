@@ -2,6 +2,9 @@ name: Release page
 on:
   push:
     branches: [main]
+  # Retry independently when a release pointer push succeeds but Pages deployment fails.
+  schedule:
+    - cron: '17 */2 * * *'
   workflow_dispatch:
 permissions:
   contents: read

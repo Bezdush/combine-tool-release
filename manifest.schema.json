@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Bezdush/combine-tool-release/blob/main/manifest.schema.json",
+  "title": "Combine Tool public channel manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "channel",
+    "addon_version",
+    "build_id",
+    "commit_sha",
+    "published_at",
+    "blender_min",
+    "blender_max",
+    "archive",
+    "release_notes",
+    "source_release_tag",
+    "signature"
+  ],
+  "properties": {
+    "schema": { "const": "combine-tool-channel-manifest-v1" },
+    "schema_version": { "const": 1 },
+    "channel": { "enum": ["beta", "stable"] },
+    "addon_version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "build_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "commit_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "blender_min": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "blender_max": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "name", "size", "sha256"],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "name": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}\\.zip$" },
+        "size": { "type": "integer", "minimum": 1, "maximum": 268435456 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "release_notes": { "type": "string", "maxLength": 32768 },
+    "source_release_tag": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "key_id", "value"],
+      "properties": {
+        "algorithm": { "const": "ed25519" },
+        "key_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
+        "value": { "type": "string", "pattern": "^[A-Za-z0-9+/]{86}==$" }
+      }
+    }
+  }
+}

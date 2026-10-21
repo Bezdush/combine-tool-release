@@ -22,7 +22,7 @@ function showRelease(channel, release) {
     panel.setAttribute('aria-busy', 'false');
     return;
   }
-  const version = element('p', `Version ${release.version}`);
+  const version = element('p', `Version ${release.version.replace('-fix.', ' Fix ')}`);
   version.className = 'version';
   const compatibility = element('p', `Blender ${release.blender_min.join('.')}–${release.blender_max.join('.')}`);
   compatibility.className = 'availability';

@@ -50,13 +50,13 @@ def public_release(channel: str) -> dict | None:
     if not isinstance(url, str) or not url.startswith(prefix):
         raise ValueError("Archive URL is outside the release repository")
     tag, separator, filename = url[len(prefix):].rpartition("/")
-    version_pattern = r"\d+\.\d+\.\d+" + (r"-beta\.[1-9]\d*" if channel == "beta" else "")
+    version_pattern = r"\d+\.\d+\.\d+" + (r"-beta\.[1-9]\d*" if channel == "beta" else r"(?:-fix\.[1-9]\d*)?")
     match = re.fullmatch(rf"(?:{channel}/)?v({version_pattern})", tag)
     if not separator or not match:
         raise ValueError("Archive tag does not match its public channel")
     version = match.group(1)
     if (filename != f"combine_tool_{version}.zip" or archive.get("name") != filename
-            or manifest.get("addon_version") != version.split("-")[0]
+            or manifest.get("addon_version") != (version.split("-beta.")[0] if channel == 'beta' else version)
             or type(archive.get("size")) is not int or archive["size"] < 1
             or not re.fullmatch(r"[0-9a-f]{64}", archive.get("sha256", ""))):
         raise ValueError("Signed pointer has inconsistent archive metadata")

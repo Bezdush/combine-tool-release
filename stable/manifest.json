@@ -1,10 +1,10 @@
 {
-  "addon_version": "0.4.0",
+  "addon_version": "0.4.1",
   "archive": {
-    "name": "combine_tool_0.4.0.zip",
-    "sha256": "50a1286cfa5ab99aeec930ee15279dc6d453e409f212dea5010322f1798dc09f",
-    "size": 107495,
-    "url": "https://github.com/Bezdush/combine-tool-release/releases/download/stable/v0.4.0/combine_tool_0.4.0.zip"
+    "name": "combine_tool_0.4.1.zip",
+    "sha256": "5abff190b00d6be2727ff02c0b457a6d2e98075cab5c2710415dc7d1adf09a92",
+    "size": 109578,
+    "url": "https://github.com/Bezdush/combine-tool-release/releases/download/stable/v0.4.1/combine_tool_0.4.1.zip"
   },
   "blender_max": [
     4,
@@ -16,17 +16,17 @@
     4,
     3
   ],
-  "build_id": "test-e3b56ad9",
+  "build_id": "test-5626a427",
   "channel": "stable",
-  "commit_sha": "e3b56ad978da5689a36441d261583bccd88d27f2",
-  "published_at": "2026-10-11T13:01:40Z",
-  "release_notes": "Combine Tool 0.4.0 from main at commit e3b56ad978da5689a36441d261583bccd88d27f2. Passed Blender 4.4.3, Blender 4.5.3 LTS, and Windows installer checks.\n\nTested in Blender 4.4.3 and 4.5.3 LTS. Supported range: 4.4.3 – 4.5.3",
+  "commit_sha": "5626a4276b8ee435afb3b595090e764667127f94",
+  "published_at": "2026-10-22T07:34:33Z",
+  "release_notes": "### Added\n\n- Version 0.4.1 prepares the updater for numbered STABLE fixes, such as 0.4.1 Fix 1 and Fix 2, with signed updates ordered by revision.\n- Add-on preferences show the installed version and provide clearer actions for installing or removing a downloaded update.\n\n### Changed\n\n- The main sidebar keeps the combine workflow focused, with clearer names for updating selected targets and repairing collection placement.\n- Generated UV and material reports use English labels regardless of the saved interface language.\n\n### Fixed\n\n- Diagnostics remain marked as not checked until refreshed, and source edits invalidate cached source, UV, material, and update results even when automatic UV transfer is off.\n- Updating a target preserves mesh data names when naming is Off or the manual mesh name is empty, instead of leaving a temporary `CombineTool_Staged` name.\n- Repeated updates keep mesh data names stable in Auto and Manual modes; the naming preview also accounts for shared mesh data.\n",
   "schema": "combine-tool-channel-manifest-v1",
   "schema_version": 1,
   "signature": {
     "algorithm": "ed25519",
     "key_id": "combine-release-2026-01",
-    "value": "ZKWw5ifkkSUIjCLsiN10fGXzVZ3G+wnyeOQyZ4aO+IRwcMS8vQjuqu3bhtMS7y/EcQNfDpnUhfFm+fELOGcBCA=="
+    "value": "W80LTCbW59Wt+MOdvhj0ttsvFziMUmIeEgKgVFmLm+2kZ6cWKs2ZNRuoAbKCYcLfDutqSXrb7RsgNMYsvQsJCQ=="
   },
-  "source_release_tag": "test/20261011T125542Z-r38141078421-a1"
+  "source_release_tag": "test/20261022T073243Z-r39741108538-a1"
 }
